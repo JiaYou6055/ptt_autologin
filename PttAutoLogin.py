@@ -27,7 +27,7 @@ def login(host, user ,password) :
         telnet.write(password + "\r\n")
         time.sleep(5)
         content = telnet.read_very_eager().decode('big5','ignore')
-        print content
+        # print content
         if u"密碼不對" in content:
             print "密碼不對或無此帳號。程式結束"
             sys.exit()
