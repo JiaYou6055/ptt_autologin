@@ -5,6 +5,8 @@ import io
 import telnetlib
 import time
 import optparse
+import random
+from datetime import datetime
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -15,10 +17,18 @@ host = 'ptt.cc'
 # password = 
 
 def login(host, user ,password) :
+    random.seed(datetime.now())
+    random_time = random.randint(5, 300)
+
     print_utf8("登入ing...")
     global telnet
     telnet = telnetlib.Telnet(host)
-    time.sleep(3)
+
+    for t in range(random_time,-1,-1):
+        sys.stdout.write("wait for {} sec...\r".format(t))
+        sys.stdout.flush()
+        time.sleep(1)
+
     content = telnet.read_very_eager().decode('big5','ignore')
     # print content
     if u"系統過載" in content :
@@ -60,7 +70,8 @@ def login(host, user ,password) :
             time.sleep(5)   
             content = telnet.read_very_eager().decode('big5','ignore')
         f = open('login_history_{}.txt'.format(user), "at+")
-        f.write(time.strftime("%Y/%m/%d %H:%M:%S",time.localtime()))
+        f.write(time.strftime("%Y/%m/%d %H:%M:%S\n\r",time.localtime()))
+        f.close()
         print_utf8("登入完成!")
     else:
         print_utf8("沒有可輸入帳號的欄位，網站可能掛了")
