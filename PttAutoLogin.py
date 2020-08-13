@@ -70,7 +70,7 @@ def login(host, user ,password) :
             time.sleep(5)   
             content = telnet.read_very_eager().decode('big5','ignore')
         f = open('login_history_{}.txt'.format(user), "at+")
-        f.write(time.strftime("%Y/%m/%d %H:%M:%S\n\r",time.localtime()))
+        f.write(time.strftime("%Y/%m/%d %H:%M:%S",time.localtime())+'\n')
         f.close()
         print_utf8("登入完成!")
     else:
