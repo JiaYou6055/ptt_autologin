@@ -1,5 +1,10 @@
 #/usr/bin/env python
 # -*- coding: UTF-8 -*-
+#deprecated
+#deprecated
+#deprecated
+#deprecated
+#deprecated
 import sys
 import io
 import telnetlib
@@ -12,9 +17,9 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
-host = 'ptt.cc'
-# user = 
-# password = 
+host = 'ptt.cc?ssh=true'
+# user =
+# password =
 
 def login(host, user ,password) :
     random.seed(datetime.now())
@@ -66,8 +71,8 @@ def login(host, user ,password) :
         if u"您有一篇文章尚未完成" in content:
             print_utf8('刪除尚未完成的文章....')
             # 放棄尚未編輯完的文章
-            telnet.write("q\r\n")   
-            time.sleep(5)   
+            telnet.write("q\r\n")
+            time.sleep(5)
             content = telnet.read_very_eager().decode('big5','ignore')
         f = open('login_history_{}.txt'.format(user), "at+")
         f.write(time.strftime("%Y/%m/%d %H:%M:%S",time.localtime())+'\n')
